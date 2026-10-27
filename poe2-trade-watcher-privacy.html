@@ -4,79 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy policy - Poe2 Trade Watcher</title>
-<meta name="robots" content="index,follow">
-<style>
-:root {
-  color-scheme: dark;
-}
-
-body {
-  margin: 0;
-  padding: 32px 20px 56px;
-  background: #0b0b0d;
-  color: #e6e2d6;
-  font: 14px/1.6 "Segoe UI", system-ui, sans-serif;
-}
-
-main {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-h1 {
-  margin: 0 0 4px;
-  font-size: 26px;
-  color: #d8b56a;
-}
-
-h2 {
-  margin: 28px 0 6px;
-  font-size: 15px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #d8b56a;
-}
-
-p, li {
-  margin: 6px 0;
-  color: #c9c4b6;
-}
-
-ul {
-  padding-left: 20px;
-}
-
-code {
-  font-family: Consolas, "Cascadia Mono", monospace;
-  font-size: 12px;
-  color: #e6e2d6;
-}
-
-a {
-  color: #8fb7d8;
-}
-
-.updated, .disclaimer {
-  color: #8a8578;
-  font-size: 12px;
-}
-
-.disclaimer {
-  margin-top: 28px;
-  border-top: 1px solid #26262b;
-  padding-top: 12px;
-}
-</style>
+<link rel="stylesheet" href="privacy.css">
 </head>
 <body>
 <main>
 <h1>Privacy policy</h1>
-<p class="updated">Poe2 Trade Watcher 2.5.0 &middot; last updated 24 October 2026</p>
+<p class="updated">Poe2 Trade Watcher 2.5.0 &middot; last updated 27 October 2026</p>
 
 <p>Poe2 Trade Watcher is an unofficial fan-made browser extension. It has no accounts, no analytics, no ads and does not sell or share data with anyone.</p>
 
 <h2>What is stored on your device</h2>
-<p>Saved trade items, builds, watched listings, search history and settings are stored locally in your browser profile (<code>chrome.storage.local</code>). They never leave your device unless you export a backup or enable Chrome Sync.</p>
+<p>Saved trade items, gear imported from a build, builds, watched listings, pinned items, search history, price history snapshots and settings are stored locally in your browser profile (<code>chrome.storage.local</code>). Price history keeps the last 50 price checks of each item you save or watch. None of it leaves your device unless you export a backup or enable Chrome Sync.</p>
+<p>The same local storage holds small caches that avoid repeated work, for example: item pictures taken from the trade pages you saved (capped at a few hundred), the public Craft of Exile data files (kept for 12 hours) and recently fetched currency rates. Removing the extension deletes all of it.</p>
+
+<h2>Build import</h2>
+<p>Build codes from Path of Building 2, pobb.in or Mobalytics (&quot;Share your Build&quot;) are decoded inside the extension, on your own device. Pasting a code contacts no server and opens no build page. The code itself is not kept: only the equipped gear you choose to import is saved, as ordinary items inside a build. Flasks and gems are skipped, and no item pictures are fetched for imported gear.</p>
+<p>Importing gear itself sends nothing and asks for no permission. The first time you press &quot;How to craft&quot; on an imported item, Chrome may ask for the optional Craft of Exile host permission; if you allow it, the extension reads the site's public data files once to fill in affix names and remembers the result. If you decline, everything else keeps working, only the affix names cannot be matched.</p>
 
 <h2>Optional Chrome Sync</h2>
 <p>If you enable "Sync settings with Chrome Sync", your settings are stored in your Google account through Chrome's built-in sync (legacy bookmark data from older versions, if any, is included). Saved items and watchers are never synced. Google's privacy policy applies to that storage.</p>
@@ -86,28 +29,28 @@ a {
 <li><strong>www.pathofexile.com</strong> &ndash; reads public trade listings of the page you are viewing (item data, seller character name, whisper text, price, stash position). The same public trade API is used to fetch the details of a single listing when you save it, watch it, copy its whisper or refresh its price, so the stored data matches the page. Watcher refreshes reuse your existing Path of Exile session so the public API can answer them; the extension never sends your session data anywhere else. A single search is created through the same API when you ask for an item's trade link.</li>
 <li><strong>poe.ninja</strong> &ndash; fetches public currency exchange rates used to convert prices.</li>
 <li><strong>mobalytics.gg</strong> &ndash; only if you click &quot;Read page&quot;: the pictures and trade links of the build page you already have open are read from that tab and copied onto your saved items. The optional host permission is requested at that click, never at install, and reading the page sends no request anywhere.</li>
-<li><strong>beta.craftofexile.com</strong> &ndash; only if you use a Craft of Exile link. It downloads the public data files the Craft of Exile site itself loads (base item ids and modifier tables) so the item can be opened with its modifiers. The files are cached in your browser profile for 12 hours; nothing about your items is sent there.</li>
+<li><strong>beta.craftofexile.com</strong> &ndash; only if you open a Craft of Exile link (including &quot;How to craft&quot; on an imported item), or import a build while that permission is already granted. It downloads the public data files the Craft of Exile site itself loads (base item ids and modifier tables) so the item can be opened with its modifiers. The optional host permission is requested on the first such click, never at install. The files are cached in your browser profile for 12 hours. These downloads carry nothing about your items; item text travels inside the tab address instead (see Craft of Exile links).</li>
 <li><strong>Discord webhook and ntfy</strong> &ndash; only if you configure them. Alerts you enable (item sold, price change, target reached, whitelisted seller) are sent to the endpoint you provide and contain the item name, price and seller character name. Discord needs an optional host permission (<code>discord.com</code> and the legacy <code>discordapp.com</code>), requested the first time you save or test a webhook, never at install. For <code>ntfy.sh</code> the same optional permission is requested on demand; a self-hosted ntfy URL is contacted directly at the address you enter.</li>
 </ul>
 
 <h2>Craft of Exile links</h2>
-<p>The &quot;Craft of Exile (beta)&quot; link only opens a Craft of Exile page in a new tab. The item data is carried inside the link itself, so the extension never sends your items to Craft of Exile from the background. For unique items the extension also reads the site's public data files (see Network requests above) to resolve the item's modifier ids; nothing else is downloaded or sent.</p>
+<p>The &quot;How to craft&quot; and &quot;Copy for CoE&quot; actions open a Craft of Exile page in a new tab. The item text is carried inside that page's address (<code>eimport=</code>), so Craft of Exile receives the item when the tab loads; that is how the import works. The extension does not upload the item anywhere else and never sends your items to Craft of Exile from the background. Items imported from a build use exactly the same link. For unique items, and to fill in affix names on imported items, the extension also reads the site's public data files (see Network requests above); nothing else is downloaded or sent.</p>
 
 <h2>Secrets never leave your profile</h2>
 <p>The Discord webhook URL, the ntfy topic and whisper tokens are kept in local storage only. They are removed from exported backup files and are not included in Chrome Sync payloads, so they are never uploaded to your browser account or to a backup file you share.</p>
 
 <h2>What is never collected</h2>
-<p>No email, no passwords, no browsing history outside the Path of Exile trade searches you make yourself, no location, no tracking and no telemetry. The extension reads only the official Path of Exile trade pages it is installed on, plus a build page you explicitly ask it to read with the optional permission above.</p>
+<p>No email, no passwords, no browsing history outside the Path of Exile trade searches you make yourself, no location, no tracking and no telemetry. The extension reads only the official Path of Exile trade pages it is installed on, plus a build page you explicitly ask it to read with the optional permission above. Build codes you paste are decoded on your device and are never uploaded.</p>
 
 <h2>Your control</h2>
 <ul>
 <li>Remove alerts by clearing the Discord webhook or ntfy topic in Settings.</li>
-<li>Delete saved items with the delete button, and everything at once by removing the extension.</li>
+<li>Delete saved or imported items with the delete button, delete a build to drop the gear it brought in, and erase everything by removing the extension.</li>
 <li>Export a full backup any time from Settings.</li>
 </ul>
 
 <h2>Contact</h2>
-<p>Questions or data requests: <a href="mailto:EMAILUL_TAU">EMAILUL_TAU</a></p>
+<p>Questions or data requests: <a href="mailto:privacy@example.com">privacy@example.com</a></p>
 <p class="disclaimer">Poe2 Trade Watcher is not affiliated with or endorsed by Grinding Gear Games.</p>
 </main>
 </body>
